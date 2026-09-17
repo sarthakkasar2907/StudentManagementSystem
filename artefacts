@@ -1,1 +1,62 @@
+Problem Statement
+Schools and students often need tools to manage student information without the trouble or extra work of user-friendly screens. Keeping types of student profiles (like those who are studying for a bachelors degree versus those doing a masters in memory needs a good design with objects to avoid repeating code. Also data that is stored in memory must be saved to a file before the program ends to stop losing the information.
+ Objectives
+Object-Oriented Design: Create a base class called Student and a derived class called GradStudent. Use inheritance.
+ Interface: Make a loop that lets users pick options while the program is running.
+In-Memory State: Use Java Collections like Array List to store add and use student objects while the program is working.
+Data Saving: Save the student information that's in memory to a file called student_records.txt when the program ends.
+Fault Tolerant: Deal with input like letters when numbers are expected using try-catch blocks to stop the program from crashing.
+ Functional Requirements
+1: View All Records: The system must go through the list of students. Use a special display method to show each students information.
+2: Register  Student: The system must ask for the students name and age make a Student object and add it to the list.
+3: Export Data on Exit: The system must. Change a file called student_records.txt and write the names and ages of all the students in the list one per line when the user chooses option 3.
+4: Terminate System: The system must end the loop safely after writing the data to the file.
+Non-Functional Requirements
+1: Usability:A simple and clean screen with instructions for the choices.
+2: Fault Tolerance:The system must handle mistakes like entering letters of numbers without breaking.
+3: Execution Speed: All the actions like adding to a list and writing to a file must happen fast.
+4: Portability: The program must work on any computer that has Java Development Kit 8 or higher.
+System Architectural Design:-
+graph TD
+    subgraph Presentation Layer
+        UI[Console Interface / Scanner Input]
+    end
+
+    subgraph Business Logic Layer
+        MainApp[SimpleStudentSystem - Main Controller]
+        DomainModel[Student Class Hierarchy]
+        Collection[ArrayList Collection Storage]
+    end
+
+    subgraph Storage Layer
+        FileIO[Java FileWriter Utility]
+        DiskFile[(student_records.txt Flat File)]
+    end
+
+    UI <--> MainApp
+    MainApp <--> DomainModel
+    MainApp <--> Collection
+    MainApp --> FileIO
+    FileIO --> DiskFiles
+Process Flow:-
+flowchart TD
+    A([Start Application]) --> B[Initialize ArrayList & Sample Data]
+    B --> C[Display Console Menu]
+    C --> D[Prompt User Input]
+    D --> E{Valid Input?}
+    E -- No / Exception --> F[Display Error Message] --> C
+    E -- Yes --> G{Select Choice}
+    G -- 1: View Students --> H[Iterate list & call display] --> C
+    G -- 2: Add Student --> I[Prompt Name & Age] --> J[Append new Student to ArrayList] --> C
+    G -- 3: Save & Exit --> K[Initialize FileWriter] --> L[Write Records to File] --> M[Close File & Exit Loop] --> N([End Application])
+    G -- Invalid Range --> O[Display 'Invalid Selection'] --> C
+Storage Design:-
+The application uses a text file instead of a real database to save data. This way the information is stored in a file in a way.
+File Schema & Sample Layout
+Path: The file is, in the folder called student_records.txt.
+Access Mode: The file is changed when the program ends.
+Delimiters: Spaces and parentheses are used to show the information and line breaks are used to end each entry
+ Output File Content:
+Sarthak (25 yrs)
+Arjun (30 yrs)
 
